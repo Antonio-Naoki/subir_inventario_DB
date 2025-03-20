@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alimentar DB Inventario</title>
+    <style>
+        /* Estilo para centrar el contenido en la pantalla */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20210805/pngtree-modern-simple-elegant-gradinet-green-landing-page-website-background-image_757426.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Fondo semitransparente para el formulario */
+        .container {
+            background-color: rgba(225, 214, 214, 0.5);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Título estilizado */
+        h1 {
+            font-family: 'Verdana', sans-serif;
+            color: #3d3737;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo para el input del archivo */
+        input[type="file"] {
+            font-size: 1em;
+            margin-bottom: 20px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #000000;
+            color: white;
+            background-color: rgba(51, 180, 73, 0.5);
+            width: 80%;
+        }
+
+        /* Botón estilizado */
+        input[type="submit"] {
+            background-color: #286d1a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        /* Efecto hover en el botón */
+        input[type="submit"]:hover {
+            background-color: #24a724;
+        }
+
+        /* Estilo para mensajes de éxito o error */
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1.1em;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Subir .xlsx para cargar inventario en SupaBase</h1>
+        <form action="/procesar" method="post" enctype="multipart/form-data">
+            <!-- Cambia el input para permitir múltiples archivos -->
+            <input type="file" name="files" multiple accept=".xlsx, .csv" required>
+            <br>
+            <input type="submit" value="Subir y procesar">
+        </form>
+
+        <!-- Mensajes dinámicos de éxito o error -->
+        {% if message %}
+        <div class="message {{ 'success' if message_type == 'success' else 'error' }}">
+            {{ message }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formatear Asistencia Cerater</title>
+    <style>
+        /* Estilo para centrar el contenido en la pantalla */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://www.arpaindustriale.com/sites/default/files/decors_fiches_default/new/0549_r.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Fondo semitransparente para el formulario */
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Título estilizado */
+        h1 {
+            font-family: 'Verdana', sans-serif;
+            color: #3d3737;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo para el input del archivo */
+        input[type="file"] {
+            font-size: 1em;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #891e1e;
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Botón estilizado */
+        input[type="submit"] {
+            background-color: #6a0c0c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        /* Efecto hover en el botón */
+        input[type="submit"]:hover {
+            background-color: #9a0a0a;
+        }
+
+        /* Estilo para mensajes de éxito o error */
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Ícono para mensajes */
+        .message::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            background-size: cover;
+        }
+
+        .success::before {
+            background-image: url('https://cdn-icons-png.flaticon.com/512/190/190411.png');
+        }
+
+        .error::before {
+            background-image: url('https://cdn-icons-png.flaticon.com/512/1828/1828665.png');
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Subir .xlsx o .csv para formatear asistencias del ivms,</h1>
+        <h1>no usar para nada más.</h1>
+        <form action="/procesar" method="post" enctype="multipart/form-data">
+            <input type="file" name="files" multiple accept=".xlsx, .csv" required>
+            <br>
+            <input type="submit" value="Subir y procesar">
+        </form>
+
+        {% if message %}
+        <div class="message {{ 'success' if message_type == 'success' else 'error' }}">
+            {{ message }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html> -->
